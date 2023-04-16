@@ -3,15 +3,23 @@ package com.spring.Jdbc;
 import com.spring.Jdbc.dao.StudentDao;
 import com.spring.Jdbc.entites.Student;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
         System.out.println("Hello world!......");
-        ApplicationContext context = new ClassPathXmlApplicationContext("jdbcconfig.xml");
+        // When using jdbcConfig.xml for configuring beans
+        //ApplicationContext context = new ClassPathXmlApplicationContext("jdbcconfig.xml");
+
+        // When using Annotations in JbdcConfig class for configuring beans
+        ApplicationContext context = new AnnotationConfigApplicationContext(JdbcConfig.class);
         StudentDao studentDao = context.getBean("studentDao", StudentDao.class);
+
 
         // Inserting the record
        /* Student student = new Student();
@@ -32,8 +40,11 @@ public class Main {
         // Delete the record
         //studentDao.delete(4);
 
-        Student student = studentDao.getStudent(2);
-        System.out.println(student);
+        // Getting Student Object using RowMapper
+        /*Student student = studentDao.getStudent(2);
+        System.out.println(student);*/
 
+        List<Student> students = studentDao.getALlStudents();
+        for(Student s : students){System.out.println(s);}
     }
 }
