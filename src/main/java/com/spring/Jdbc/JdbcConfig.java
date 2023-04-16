@@ -4,6 +4,7 @@ import com.spring.Jdbc.dao.StudentDao;
 import com.spring.Jdbc.dao.StudentDaoImpl;
 import com.spring.Jdbc.entites.Student;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -11,6 +12,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
 
 @Configuration
+@ComponentScan("com.spring.Jdbc.dao")
 public class JdbcConfig {
 
     @Bean("ds")
